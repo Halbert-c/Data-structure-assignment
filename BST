@@ -1,0 +1,18 @@
+import tkinter as tk 
+from tkinter import messagebox
+
+class TreeNode: 
+    def __init__(self, val=None): #Initialize the Tree Node with a value 
+        self.value = val 
+        if self.value: #If the node has value, create left and right children nodes
+            self.left = Tree ()
+            self.right = Tree()
+        else: 
+            self.left = None 
+            self.right = None 
+
+    def isEmpty(self): 
+        return (self.value == None)
+
+ 
+
