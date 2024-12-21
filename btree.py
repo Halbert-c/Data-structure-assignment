@@ -171,6 +171,9 @@ class BTreeVisualizer:
         self.delete_button = tk.Button(self.control_frame, text="Delete", command=self.delete_key)
         self.delete_button.pack(side=tk.LEFT)
 
+        self.clear_button = tk.Button(self.control_frame, text="Clear", command=self.clear_canvas)
+        self.clear_button.pack(side=tk.LEFT)
+
     def draw_tree(self):
         self.canvas.delete("all")
         if self.tree.root:
@@ -179,8 +182,10 @@ class BTreeVisualizer:
     def _draw_node(self, node, x, y, x_offset):
         self._draw_circle(x, y, node.keys)
         if not node.is_leaf:
+            num_children = len(node.children)
+            # Adjust x_offset if necessary to ensure proper spacing
             for i, child in enumerate(node.children):
-                child_x = x - x_offset + i * (x_offset // len(node.children))
+                child_x = x - (x_offset // 2) + i * (x_offset // num_children)
                 child_y = y + 100
                 self.canvas.create_line(x, y, child_x, child_y, fill="black")
                 self._draw_node(child, child_x, child_y, x_offset // 2)
@@ -208,12 +213,15 @@ class BTreeVisualizer:
         except ValueError:
             pass
 
+    def clear_canvas(self):
+        self.canvas.delete("all")
+        
     def run(self):
         self.window.mainloop()
 
 if __name__ == "__main__":
     # Create a B-Tree with minimum degree 3
-    btree = BTree(3)
+    btree = BTree(2)
 
     # Visualize the B-Tree
     visualizer = BTreeVisualizer(btree)
