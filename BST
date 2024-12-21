@@ -10,9 +10,96 @@ class TreeNode:
         else: 
             self.left = None 
             self.right = None 
+    def isLeaf(self):
+        if self.left == None and self.right == None:
+            return True 
+        else:
+            return False
 
     def isEmpty(self): 
-        return (self.value == None)
+        return (self.value == None) #check whether node is empty
+
+    def insert(self,data):
+        if self.isEmpty():
+            self.value = data #Create left and right children for insertion
+            self.left = Tree()
+            self.right = Tree()
+            print("{} id inserted sucessfully".format(self.value))
+
+            #If data is less than current node value
+            #Insert into left subtree
+        elif data < self.value:
+            self.left.insert(data)
+            return 
+
+        #Insert into right subtree if the data is greater than 
+        elif data > self.value: 
+            self.right.insert(data)
+
+        elif data == self.value:
+            return 
+    
+    def search(self,v):
+        if self.isEmpty(): #If the tree is empty, the value is not found 
+            print ("{} is not found".format(v))
+            return False 
+
+        if self.value == v: #If the value is found at the current node, print a message
+            print ("{} is found".format(v))
+            return True 
+        
+        if self.value > v:
+            return self.left.find(v)
+
+        else: 
+            return self.right.find(v)
+
+    def inorder(self): 
+        #Traverse the Tree inorder and return the values 
+        if self.isEmpty: 
+            return ([])
+        else:
+            return (self.left.inorder() + [self.value] + self.right.inorder())
+
+    def maxVal(self):
+        if self.right.right == None:
+            return (self.value)
+
+        else: 
+            return (self.right.maxVal())
+
+    def delete(self,v):
+        #Delete a value from the Tree 
+        if self.isEmpty():
+            return 
+        if v < self.value:
+            self.left.delete(v)
+            return 
+        if v > self.right.delete(v):
+            return 
+        if v == self.value: 
+            if self.isLeaf():
+                self.value = None 
+                self.left = None 
+                self.right = None 
+                return 
+            elif self.left.isEmpty():
+                self.value = self.right.value
+                self.left = self.right.left
+                self.right = self.right.right
+                return 
+            else: 
+                self.value = self.left.maxVal()
+                self.left.delete(self.left.maxVal())
+                return 
+
+class GUI_BST:
+    def __init__(self,root):
+        self.root = root 
+        self.tree = TreeNode
+        
+
+
 
  
 
