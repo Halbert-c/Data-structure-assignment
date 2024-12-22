@@ -62,6 +62,8 @@ class BTree:
             if idx < len(node.keys) and key > node.keys[idx]:
                 idx += 1
             self._delete(node.children[idx], key)
+    def reset(self):
+        self.root = BTreeNode(self.t, True)
 
     def _get_predecessor(self, node, idx):
         current = node.children[idx]
@@ -175,9 +177,11 @@ class BTreeVisualizer:
         self.clear_button.pack(side=tk.LEFT)
 
     def draw_tree(self):
-        self.canvas.delete("all")
-        if self.tree.root:
+        self.canvas.delete("all")  # Clear the canvas before drawing
+        if self.tree.root and len(self.tree.root.keys) > 0:
             self._draw_node(self.tree.root, 400, 50, 200)
+        else:
+            self.canvas.create_text(400, 300, text="Tree is empty", font=("Arial", 14))
 
     def _draw_node(self, node, x, y, x_offset):
         self._draw_circle(x, y, node.keys)
@@ -214,8 +218,10 @@ class BTreeVisualizer:
             pass
 
     def clear_canvas(self):
-        self.canvas.delete("all")
-        
+        self.tree.reset()  
+        self.canvas.delete("all")  # Clear the canvas visuals
+        self.draw_tree()
+
     def run(self):
         self.window.mainloop()
 
