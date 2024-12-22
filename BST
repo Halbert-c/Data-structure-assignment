@@ -4,7 +4,7 @@ from tkinter import messagebox
 class TreeNode:
     def __init__(self, key):
         self.key = key
-        self.left = None
+        self.left = None 
         self.right = None
 
 class BinarySearchTree:
@@ -126,7 +126,7 @@ class BSTVisualizer:
     def draw_tree(self, node, x, y, offset):
         if node:
             self.canvas.create_oval(x-15, y-15, x+15, y+15, fill="blue")
-            self.canvas.create_text(x, y, text=str(node.key), font=("Arial", 12, "bold"))
+            self.canvas.create_text(x, y, text=str(node.key), font=("Arial", 12, "bold")) 
             
             if node.left:
                 self.canvas.create_line(x, y, x-offset, y+40)
