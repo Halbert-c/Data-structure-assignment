@@ -102,6 +102,8 @@ class BSTVisualizer:
             self.draw_tree(self.tree.root, 400, 50, 200)
         except ValueError:
             messagebox.showerror("Error", "Please enter a valid integer")
+        finally:
+            self.entry.delete(0,tk.END)
 
     def search(self):
         try:
@@ -113,6 +115,8 @@ class BSTVisualizer:
                 messagebox.showinfo("Search Result", f"Key {key} not found in the tree.")
         except ValueError:
             messagebox.showerror("Error", "Please enter a valid integer")
+        finally:
+            self.entry.delete(0,tk.END)
 
     def delete(self):
         try:
@@ -122,6 +126,8 @@ class BSTVisualizer:
             self.draw_tree(self.tree.root, 400, 50, 200)
         except ValueError:
             messagebox.showerror("Error", "Please enter a valid integer")
+        finally:
+            self.entry.delete(0,tk.END)
 
     def draw_tree(self, node, x, y, offset):
         if node:

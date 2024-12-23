@@ -75,6 +75,7 @@ class GuiDesign:
         self.clear_button = tk.Button(self.controls_frame, text="Clear", command=self.clear_canvas)
         self.clear_button.pack(side=tk.LEFT, padx=5)
 
+
     def add_element(self):
         try:
             value = int(self.entry.get())
@@ -84,6 +85,8 @@ class GuiDesign:
             self.display_array()
         except ValueError:
             messagebox.showerror("Error", "Please enter a valid integer between 0 and 150")
+        finally:
+            self.entry.delete(0,tk.END)
 
     def sort_elements(self):
         if not self.array:
@@ -92,6 +95,7 @@ class GuiDesign:
 
         MergeSort.merge_sort(self.array, 0, len(self.array) - 1)
         self.display_array()
+        self.entry.delete(0,tk.END)
 
     def delete_element(self):
         try:
@@ -103,6 +107,9 @@ class GuiDesign:
                 messagebox.showinfo("Info", f"Value {value} not found in the array")
         except ValueError:
             messagebox.showerror("Error", "Please enter a valid integer")
+        finally:
+            self.entry.delete(0,tk.END)
+
 
     def search_element(self):
         try:
@@ -114,6 +121,8 @@ class GuiDesign:
                 messagebox.showinfo("Search Result", f"Value {value} not found in the array.")
         except ValueError:
             messagebox.showerror("Error", "Please enter a valid integer")
+        finally:
+            self.entry.delete(0,tk.END)
 
     def display_array(self):
         self.clear_canvas()

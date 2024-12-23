@@ -203,6 +203,8 @@ class BTreeVisualizer:
             self.draw_tree()
         except ValueError:
             pass
+        finally:
+            self.entry.delete(0,tk.END)
 
     def delete_key(self):
         try:
@@ -212,6 +214,8 @@ class BTreeVisualizer:
             self.draw_tree()
         except ValueError:
             pass
+        finally:
+            self.entry.delete(0,tk.END)
 
     def clear_canvas(self):
         self.canvas.delete("all")
