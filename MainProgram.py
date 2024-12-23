@@ -1,8 +1,9 @@
 import tkinter as tk
 from tkinter import messagebox
 from BST import BSTVisualizer  
-from btree import BTreeVisualizer  
+from btree import BTreeVisualizer , BTreeNode, BTree
 from MergeSort import GuiDesign
+import subprocess
 
 
 class MainProgramGUI:
@@ -37,8 +38,7 @@ class MainProgramGUI:
         GuiDesign(merge_sort_window)  
 
     def open_Binary_Tree_visualizer(self):
-        btree_window = tk.Toplevel(self.root)
-        BTreeVisualizer(btree_window) 
+            subprocess.run(['python', 'btree.py'])
 
 
 if __name__ == "__main__":
