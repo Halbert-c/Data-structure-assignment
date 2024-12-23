@@ -71,6 +71,8 @@ class BinarySearchTree:
 class BSTVisualizer:
     def __init__(self, root):
         self.root = root
+        self.root.title("Binary Search Tree Visualizer")
+
         self.tree = BinarySearchTree()
 
         self.canvas = tk.Canvas(root, width=800, height=600, bg="white")
@@ -145,8 +147,3 @@ class BSTVisualizer:
     def clear_canvas(self):
         self.canvas.delete("all")
 
-if __name__ == "__main__":
-    root = tk.Tk()
-    root.title("Binary Search Tree Visualizer")
-    app = BSTVisualizer(root)
-    root.mainloop()
