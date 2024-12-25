@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import Canvas
+from tkinter import Canvas, ttk
 
 class BTreeNode:
     def __init__(self, t, is_leaf):
@@ -62,6 +62,7 @@ class BTree:
             if idx < len(node.keys) and key > node.keys[idx]:
                 idx += 1
             self._delete(node.children[idx], key)
+
     def reset(self):
         self.root = BTreeNode(self.t, True)
 
@@ -164,6 +165,14 @@ class BTreeVisualizer:
         self.control_frame = tk.Frame(self.window)
         self.control_frame.pack()
 
+        self.degree_label = tk.Label(self.control_frame, text="Degree:")
+        self.degree_label.pack(side=tk.LEFT)
+
+        self.degree_combobox = ttk.Combobox(self.control_frame, values=[2, 3, 4, 5], state="readonly")
+        self.degree_combobox.set(2)
+        self.degree_combobox.pack(side=tk.LEFT)
+        self.degree_combobox.bind("<<ComboboxSelected>>", self.set_degree)
+
         self.entry = tk.Entry(self.control_frame)
         self.entry.pack(side=tk.LEFT)
 
@@ -175,6 +184,15 @@ class BTreeVisualizer:
 
         self.clear_button = tk.Button(self.control_frame, text="Clear", command=self.clear_canvas)
         self.clear_button.pack(side=tk.LEFT)
+
+    def set_degree(self, event):
+        try:
+            new_degree = int(self.degree_combobox.get())
+            self.tree.t = new_degree
+            self.tree.reset()
+            self.draw_tree()
+        except ValueError:
+            pass
 
     def draw_tree(self):
         self.canvas.delete("all")  # Clear the canvas before drawing
@@ -208,7 +226,7 @@ class BTreeVisualizer:
         except ValueError:
             pass
         finally:
-            self.entry.delete(0,tk.END)
+            self.entry.delete(0, tk.END)
 
     def delete_key(self):
         try:
@@ -219,7 +237,7 @@ class BTreeVisualizer:
         except ValueError:
             pass
         finally:
-            self.entry.delete(0,tk.END)
+            self.entry.delete(0, tk.END)
 
     def clear_canvas(self):
         self.tree.reset()  
@@ -230,7 +248,7 @@ class BTreeVisualizer:
         self.window.mainloop()
 
 if __name__ == "__main__":
-    # Create a B-Tree with minimum degree 3
+    # Create a B-Tree with minimum degree 2
     btree = BTree(2)
 
     # Visualize the B-Tree
