@@ -72,21 +72,22 @@ class GuiDesign:
         self.search_button = tk.Button(self.controls_frame, text="Search", command=self.search_element)
         self.search_button.pack(side=tk.LEFT, padx=5)
 
-        self.clear_button = tk.Button(self.controls_frame, text="Clear", command=self.clear_canvas)
+        self.clear_button = tk.Button(self.controls_frame, text="Clear", command=self.clear_canvas1)
         self.clear_button.pack(side=tk.LEFT, padx=5)
 
 
     def add_element(self):
         try:
-            value = int(self.entry.get())
+            value = int(self.entry.get())  
             if value < 0 or value > 150:
-                raise ValueError("Value out of range")
-            self.array.append(value)
-            self.display_array()
+                raise ValueError("Value out of range")  
+            self.array.append(value)  
+            self.display_array() 
+            print(f"Added value: {value}")  
         except ValueError:
-            messagebox.showerror("Error", "Please enter a valid integer between 0 and 150")
+            messagebox.showerror("Error", "Please enter a valid integer between 0 and 150")  
         finally:
-            self.entry.delete(0,tk.END)
+            self.entry.delete(0, tk.END)  
 
     def sort_elements(self):
         if not self.array:
@@ -126,15 +127,20 @@ class GuiDesign:
 
     def display_array(self):
         self.clear_canvas()
+        print("Array contents:", self.array)  
         x = 50
         for value in self.array:
             self.canvas.create_rectangle(x, 300 - value * 2, x + 30, 300, fill="lightblue")
             self.canvas.create_text(x + 15, 300 - value * 2 - 10, text=str(value), font=("Arial", 10, "bold"))
             x += 40
-
     def clear_canvas(self):
-        self.canvas.delete("all")
-
+        self.canvas.delete("all") 
+        
+    def clear_canvas1(self):
+        self.canvas.delete("all")  # Clear the canvas
+        self.array.clear()  # Clear the array
+        self.entry.delete(0, tk.END)
+        
 if __name__ == "__main__":
     root = tk.Tk()
     root.title("Merge Sort Visualizer")
