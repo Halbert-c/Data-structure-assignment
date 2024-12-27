@@ -21,7 +21,7 @@ class MainProgramGUI:
         self.BST_Button.pack(side=tk.TOP, pady=5)
 
         # Button to open the Binary Tree Visualizer
-        self.Binary_Tree_Button = tk.Button(self.control_frame, text="Binary Tree Visualizer",command=self.open_Binary_Tree_visualizer)
+        self.Binary_Tree_Button = tk.Button(self.control_frame, text="B-Tree Visualizer",command=self.open_Binary_Tree_visualizer)
         self.Binary_Tree_Button.pack(side=tk.TOP, pady=5)
 
         # Button to open the Merge Sort Visualizer
